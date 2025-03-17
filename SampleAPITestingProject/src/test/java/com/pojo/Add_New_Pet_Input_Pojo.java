@@ -20,7 +20,7 @@ public class Add_New_Pet_Input_Pojo {
     public ArrayList<String> photoUrls;
     public ArrayList<Tag> tags;
     public String status;
-    public int employeeId;
+    public int studentId;
   //New Change
     public Add_New_Pet_Input_Pojo(int id, Category category, String name, ArrayList<String> photoUrls, ArrayList<Tag> tags, String status) {
         this.id = id;
