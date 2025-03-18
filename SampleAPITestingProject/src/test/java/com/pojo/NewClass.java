@@ -5,5 +5,5 @@ public class NewClass {
     public int studentId;
     public  String studentName;
     public String practice;
-    public int practiceName;
+
 }
