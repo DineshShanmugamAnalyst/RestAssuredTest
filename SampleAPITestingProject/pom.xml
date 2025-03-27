@@ -38,10 +38,11 @@
                 <version>3.0.0-M7</version>
                 <configuration>
                     <includes>
-                        <include>**/*Test.java</include>  <!-- Ensures tests are detected -->
+                        <include>**/Sample.java</include>
                     </includes>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 
