@@ -1,0 +1,15 @@
+<suite name="Parallel Test Suite" parallel="tests" thread-count="2">
+
+    <test name="Test Set 1">
+        <classes>
+            <class name="com.test.PracticeGroups"/>
+        </classes>
+    </test>
+
+    <test name="Test Set 2">
+        <classes>
+            <class name="PracticeGroup"/>
+        </classes>
+    </test>
+
+</suite>

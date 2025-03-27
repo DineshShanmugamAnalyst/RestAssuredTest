@@ -1,0 +1,9 @@
+<suite name="Parallel Test Suite" parallel="methods" thread-count="3">
+
+    <test name="Pet API Tests">
+        <classes>
+            <class name="com.test.PracticeGroups"/>
+        </classes>
+    </test>
+
+</suite>

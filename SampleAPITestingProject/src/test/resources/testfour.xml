@@ -1,0 +1,14 @@
+<suite name="Pet API Test Suite">
+    <listeners>
+        <listener class-name="com.test.MyAnnotationTransformer"/>
+        <listener class-name="com.test.MyInvokedMethodListener"/>
+        <listener class-name="com.test.TestPassPercentageListener"/>
+        <listener class-name="com.test.CustomMethodInterceptor"/>
+    </listeners>
+
+    <test name="Pet API Tests">
+        <classes>
+            <class name="com.test.PracticeGroups"/>
+        </classes>
+    </test>
+</suite>

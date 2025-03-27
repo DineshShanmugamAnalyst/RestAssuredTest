@@ -1,30 +1,12 @@
 package com.pojo;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 
-import java.util.ArrayList;
-
+@Data
 @Builder
-@Getter
-@JsonIgnoreProperties(ignoreUnknown = true)
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Add_New_Pet {
-    public int id;
-
-//
-//    public Add_New_Pet(int id, String name) {
-//        this.id = id;
-//        this.name = name;
-//    }
-
-
-
-    public String name;
-    public Category category;
-    public ArrayList<String> photoUrls;
-    public ArrayList<Tag> tags;
-    public String status;
+    private String name;
+    private String category;
+    private int id;
 }

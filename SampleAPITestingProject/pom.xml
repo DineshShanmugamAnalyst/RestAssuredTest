@@ -9,12 +9,16 @@
     <version>1.0-SNAPSHOT</version>
 
     <build>
-        <testResources>
-            <testResource>
+        <resources>
+            <resource>
                 <directory>src/test/resources</directory>
-            </testResource>
-        </testResources>
+                <includes>
+                    <include>**/*.json</include>
+                </includes>
+            </resource>
+        </resources>
     </build>
+
 
     <properties>
         <maven.compiler.source>23</maven.compiler.source>
@@ -30,6 +34,14 @@
             <version>7.11.0</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.24.2</version>
+            <scope>test</scope>
+        </dependency>
+
 
         <!-- RestAssured for API Testing -->
         <dependency>
@@ -62,8 +74,6 @@
             <version>1.18.36</version>
             <scope>provided</scope>
         </dependency>
-
-
     </dependencies>
 
 </project>

@@ -1,6 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
+  "additionalProperties": false,
   "properties": {
     "page": {
       "type": "integer"
@@ -18,11 +19,14 @@
       "type": "array",
       "items": {
         "type": "object",
+        "additionalProperties": false,
         "properties": {
           "id": {
+            "type": "integer"
           },
           "email": {
-            "type": "string"
+            "type": "string",
+            "format": "email"
           },
           "first_name": {
             "type": "string"
@@ -31,23 +35,26 @@
             "type": "string"
           },
           "avatar": {
-            "type": "string"
+            "type": "string",
+            "format": "uri"
           }
         },
         "required": [
-
+          "id",
+          "email",
           "first_name",
           "last_name",
           "avatar"
-        ],
-        "additionalProperties": true
+        ]
       }
     },
     "support": {
       "type": "object",
+      "additionalProperties": false,
       "properties": {
         "url": {
-          "type": "string"
+          "type": "string",
+          "format": "uri"
         },
         "text": {
           "type": "string"
