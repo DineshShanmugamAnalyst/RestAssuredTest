@@ -1,27 +1,101 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'MyMaven'  // Use the exact name from Jenkins
+    parameters {
+        // Define a string parameter for the environment
+        string(name: 'ENV', defaultValue: 'QA', description: 'Specify the environment (QA, Staging, Production)')
     }
 
     stages {
+        stage('Checkout') {
+            steps {
+                // Checkout code from the repository
+                checkout scm
+            }
+        }
+
         stage('Build') {
             steps {
-                bat 'mvn clean package'  // Windows: use 'bat'
+                script {
+                    echo "Running build for environment: ${params.ENV}"
+                    // Run build or compile steps here, e.g., Maven or Gradle
+                    // Example for Maven:
+                    // sh 'mvn clean install'
+                }
             }
         }
 
         stage('Test') {
             steps {
-                bat 'mvn test'
+                script {
+                    echo "Running tests in environment: ${params.ENV}"
+                    // Example of running tests with the environment parameter
+                    sh "mvn test -Denv=${params.ENV}"
+                }
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploying the project...'
+                script {
+                    if (params.ENV == 'Production') {
+                        echo "Deploying to production environment"
+                        // Add production deployment steps here
+                    } else if (params.ENV == 'Staging') {
+                        echo "Deploying to staging environment"
+                        // Add staging deployment steps here
+                    } else {
+                        echo "Deploying to QA environment"
+                        // Add QA deployment steps here
+                    }
+                }
             }
+        }
+
+        stage('Cleanup') {
+            steps {
+                // Cleanup after the build/deployment
+                echo "Cleaning up workspace after tests"
+                cleanWs()  // Cleans up the workspace
+            }
+        }
+    }
+
+    post {
+        success {
+            // Send email notification on success
+            emailext(
+                subject: "Build Success: ${env.JOB_NAME} - ${env.BUILD_NUMBER}",
+                body: "The build has completed successfully.\n\nJob: ${env.JOB_NAME}\nBuild: ${env.BUILD_NUMBER}\nStatus: SUCCESS",
+                to: 'recipient@example.com' // Replace with your recipient email
+            )
+        }
+
+        failure {
+            // Send email notification on failure
+            emailext(
+                subject: "Build Failure: ${env.JOB_NAME} - ${env.BUILD_NUMBER}",
+                body: "The build has failed.\n\nJob: ${env.JOB_NAME}\nBuild: ${env.BUILD_NUMBER}\nStatus: FAILURE",
+                to: 'recipient@example.com' // Replace with your recipient email
+            )
+        }
+
+        unstable {
+            // Send email notification if build is unstable
+            emailext(
+                subject: "Build Unstable: ${env.JOB_NAME} - ${env.BUILD_NUMBER}",
+                body: "The build has finished with an unstable status.\n\nJob: ${env.JOB_NAME}\nBuild: ${env.BUILD_NUMBER}\nStatus: UNSTABLE",
+                to: 'recipient@example.com' // Replace with your recipient email
+            )
+        }
+
+        always {
+            // Send email notification on completion (whether success, failure, or unstable)
+            emailext(
+                subject: "Build Finished: ${env.JOB_NAME} - ${env.BUILD_NUMBER}",
+                body: "The build has finished.\n\nJob: ${env.JOB_NAME}\nBuild: ${env.BUILD_NUMBER}\nStatus: ${currentBuild.currentResult}",
+                to: 'recipient@example.com' // Replace with your recipient email
+            )
         }
     }
 }
