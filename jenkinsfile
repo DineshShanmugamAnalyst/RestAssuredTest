@@ -2,13 +2,13 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven'  // This should match the name you set in Jenkins
+        maven 'MyMaven'  // Use the exact name from Jenkins
     }
 
     stages {
         stage('Build') {
             steps {
-                bat 'mvn clean package'  // Use 'bat' for Windows
+                bat 'mvn clean package'  // Windows: use 'bat'
             }
         }
 
