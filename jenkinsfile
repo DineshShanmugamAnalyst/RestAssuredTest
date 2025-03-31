@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'master', url: 'https://github.com/DineshShanmugamAnalyst/RestAssuredTest.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'  // Use 'bat' for Windows
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'mvn test'  // Runs test cases
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying the project...'
+            }
+        }
+    }
+}
